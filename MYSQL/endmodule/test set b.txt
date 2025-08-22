@@ -1,0 +1,130 @@
+                                           Set B
+
+1. Retrieve the names of all customers from the `Customers` table, sorted in alphabetical order.
+-> Select CustomerName From customers
+   order by CustomerName asc;
+
+2. Fetch the top 10 most expensive products from the `Products` table.
+ -> Select product_nm,product_price from products
+    order by product_price desc
+    limit 10;
+
+3. Write a query to get the second-highest salary from the `Employees` table.
+ -> Select max(salary) as "second_max" from employees
+   where salary<(select max(salary) from employees);
+   or
+-> select salary as "second_max" from employees
+   order by salary desc 
+   limit 1 offset 1;
+
+4. Get the total count of customers from each city in the `Customers` table.
+-> select city , count(customer_id)
+   from customers
+   group by city;
+
+5. Retrieve department-wise total salary from the `Employees` table but only include
+departments where the total salary is greater than 2,00,000.
+ -> Select department_id, sum(salary) from employees
+    group by department_id
+    having sum(salary)>200000;
+
+6. Extract only the last four characters of the `phone_number` column and first three characters
+from `customerName` columns from the `Customers` table.
+  -> select substring ('phone_number',-4),
+            substring('customerName',1,3) from customer;
+
+7. Write a query to retrieve products where the `product_name` contains "Pro".
+ -> Select * from products
+    where product_name like '%pro%';
+
+8. Fetch the total number of students per course from the `Students` table, only for courses that
+have at least 30 students enrolled.
+-> select course, count(student_id) as 'total_number' from students
+   group by course
+   having count(student_id)>=30;
+
+9. Write an SQL query to find the number of orders placed in each month of the year.
+ -> select month(order_date), count(order_id) as 'number_of_order' from orders
+    group by month(order_date);
+
+10. Get the highest and lowest salary per department from the `Employees` table.
+-> select dept_id, max(salary) as 'max_salary',
+    min(salary) as 'min_salary' from employees
+   group by dept_id;
+
+11. What does the following query return?
+SELECT SUBSTRING('Database', 1, 4);
+a) Data
+b) tabase
+c) DataB
+d) Error
+Ans
+   a) Data
+
+12. Which clause is used to sort the results in descending order?
+a) ORDER BY DESC
+b) ORDER BY ASC
+c) SORT BY DESC
+d) GROUP BY DESC
+Ans
+  a) ORDER BY DESC
+
+13. What is the default sorting order of `ORDER BY` if no direction (ASC/DESC) is specified?
+a) ASC
+b) DESC
+c) No specific order
+d) Error
+Ans
+  a) ASC
+
+14. What will be the output of the following query?
+SELECT ROUND(15.678, 2);
+a) 15.67
+b) 15.68
+c) 15.7
+d) 16
+Ans
+b) 15.68
+
+15. Which SQL function is used to count the number of rows in a table?
+a) TOTAL()
+b) COUNT()
+c) SUM()
+d) NUMBER()
+
+Ans
+b) COUNT()
+
+16. Question:
+You have two tables:
+• Orders with columns: order_id, customer_id, order_date, total_amount.
+• Customers with columns: customer_id, customer_name.
+• O/P- customer_id, customer_name, avg_order_value
+Write an SQL query to find the average order value (total_amount) for each customer. Only
+include customers who have made more than 2 orders.
+ 
+select c.customer_id, c.customer_name, avg(total_amount) as 'avg_order_value'
+from  customers as c  inner join orders as o
+on o.customer_id=c.customer_id
+group by c.customer_id, c.customer_name
+having count(o.order_id)>2;
+
+
+17. Question:
+You have two tables:
+• Products with columns: product_id, product_name.
+• Sales with columns: sale_id, product_id, sale_date, amount.
+• O/P- product_id | product_name | sales_count
+Write an SQL query to find the number of sales made for each product. Only include products
+with more than 50 sales.
+
+select p.product_id,p.product_name,count(sale_id) as 'sales_count'
+from products as p inner join sales as s
+on p.product_id=s.product_id
+group by p.product_id, p.product_name
+having count(s.sale_id)>50;
+
+
+
+
+  
