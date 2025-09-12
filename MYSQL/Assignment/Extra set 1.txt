@@ -1,0 +1,57 @@
+                                         SQL Test 2 SET A
+
+1. Write a SQL statement to display all the information of all salesmen
+-> select * from salesman;
+
+2. Write a query to display the columns in descending order of purchase amount from for all
+the orders.
+-> Select purch_amt from orders
+   order by purch_amt desc;
+
+3. Write a SQL statement to display names and city of salesman, who belongs to the city of
+Paris.
+-> Select name,city from salesman 
+    where city='Paris';
+
+4. Write a SQL query to display the order number followed by order date and the purchase
+amount for each order which will be delivered by the salesman who is holding the ID 5001.
+-> Select ord_no,ord_date,purch_amt 
+   from orders
+   where salesman_id=5001;
+
+5. Write a SQL statement to find the average commission that a salesman get.
+-> Select avg(commission)
+   From salesman;
+
+6. Write a SQL statement to find the number of salesmen currently listing for all of their
+customers.
+->  Select count(distinct salesman_id)
+   from customer;
+
+ 7. Write a SQL statement to find the highest purchase amount ordered by the each customer
+with their ID and highest purchase amount.
+-> Select customer_id,max(purch_amt)
+   from orders
+   group by customer_id;
+
+8. Write a SQL statement to find the names of all customers along with the salesmen who
+works for them
+-> Select c.cust_name,s.name 
+   from customer as c
+   inner join salesman as s
+   on c.salesman_id=s.salesman_id;
+
+9. Write a SQL statement that finds out each order number followed by the name of the
+customers who made the order.
+-> Select o.ord_no,c.cust_name
+   from orders as o
+   inner join customer as c
+   on o.customer_id=c.customer_id;
+
+10. Write a query to find all the orders issued against the salesman who may works for
+customer whose id is 3007
+-> Select * from orders where salesman_id=
+  (select salesman_id from customer
+   where customer_id=3007);
+
+ 
